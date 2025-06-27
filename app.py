@@ -10,12 +10,15 @@ import os
 from werkzeug.utils import secure_filename
 
 import sqlite3
-sqlite3.connect("instance/app.db").close()
+
+db_path = os.path.join(os.path.dirname(__file__), "instance", "app.db")
+sqlite3.connect(db_path).close()
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
-db = SQL("sqlite:///instance/app.db")
+db = SQL(f"sqlite:///{db_path}")
+
 
 db.execute("""
     CREATE TABLE IF NOT EXISTS users (

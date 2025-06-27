@@ -1,5 +1,33 @@
 {% extends "layout.html" %}
+
 {% block title %}Edit Blog{% endblock %}
+
+{% block head %}
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+<style>
+    .ql-editor {
+        color: #fff !important;
+        border-radius: 4px;
+    }
+
+    .ql-toolbar {
+        background-color: #222;
+        border: 1px solid #444;
+    }
+
+    .ql-container {
+        border: 1px solid #444;
+    }
+
+    .ql-editor::before {
+        color: #fff !important;
+        opacity: 0.6;
+        font-style: italic;
+    }
+</style>
+{% endblock %}
+
 {% block body %}
 <div class="container mt-5">
     <h3>Edit Blog</h3>
@@ -8,10 +36,13 @@
             <label>Title</label>
             <input name="title" class="form-control" value="{{ blog.title }}" required>
         </div>
+
         <div class="mb-3">
-            <label>Content</label>
-            <textarea name="content" class="form-control" rows="6" required>{{ blog.content }}</textarea>
+            <label for="content" class="form-label">Content</label>
+            <div id="editor" style="height: 300px;" class="text-bg-dark">{{ blog.content | safe }}</div>
+            <input type="hidden" id="content" name="content">
         </div>
+
         <div class="mb-3">
             <label>Category</label>
             <select name="category" class="form-select" required>
@@ -24,8 +55,21 @@
                 <option value="Other" {% if blog.category=='Other' %}selected{% endif %}>Other</option>
             </select>
         </div>
+
         <button type="submit" class="btn btn-success">Update</button>
         <a href="/my_blogs" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+<script>
+    var quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+
+    document.querySelector('form').onsubmit = function () {
+        document.querySelector('#content').value = quill.root.innerHTML;
+    };
+</script>
 {% endblock %}
