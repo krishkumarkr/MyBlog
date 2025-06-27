@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}Edit Blog{% endblock %}
+{% block body %}
+<div class="container mt-5">
+    <h3>Edit Blog</h3>
+    <form method="POST">
+        <div class="mb-3">
+            <label>Title</label>
+            <input name="title" class="form-control" value="{{ blog.title }}" required>
+        </div>
+        <div class="mb-3">
+            <label>Content</label>
+            <textarea name="content" class="form-control" rows="6" required>{{ blog.content }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label>Category</label>
+            <select name="category" class="form-select" required>
+                <option value="">-- Select a Category --</option>
+                <option value="Tech" {% if blog.category=='Tech' %}selected{% endif %}>Tech</option>
+                <option value="Travel" {% if blog.category=='Travel' %}selected{% endif %}>Travel</option>
+                <option value="Food" {% if blog.category=='Food' %}selected{% endif %}>Food</option>
+                <option value="Entertainment" {% if blog.category=='Entertainment' %}selected{% endif %}>Entertainment</option>
+                <option value="Lifestyle" {% if blog.category=='Lifestyle' %}selected{% endif %}>Lifestyle</option>
+                <option value="Other" {% if blog.category=='Other' %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Update</button>
+        <a href="/my_blogs" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

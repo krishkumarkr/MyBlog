@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}Liked Blogs{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h3 class="mb-4 text-center">❤️ Liked Blogs</h3>
+
+    {% if blogs %}
+        {% for blog in blogs %}
+        <div class="card mb-3 shadow-sm border-secondary">
+            <div class="card-body">
+                <h5 class="card-title">{{ blog.title }}</h5>
+                <p class="card-text">{{ blog.content[:150] }}...</p>
+                <p class="text-muted" style="font-size: 0.85rem;">By <a href="/user/{{ blog.user_name }}">@{{ blog.user_name }}</a></p>
+                <a href="{{ url_for('view_blog', blog_id=blog.id) }}" class="btn btn-sm btn-outline-light">Read More</a>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-muted text-center">You haven't liked any blogs yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ category }} Blogs{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h3 class="mb-4 text-center">{{ category }} Blogs</h3>
+
+    {% if blogs %}
+        {% for blog in blogs %}
+            <div class="card mb-3 shadow-sm" style="font-size: 0.9rem; border: 1px solid #555;">
+                <div class="card-body p-3 position-relative">
+                    <span class="badge bg-secondary position-absolute top-0 end-0 m-2" style="font-size: 0.75rem;">
+                        {{ blog.category }}
+                    </span>
+                    <h5 class="card-title mb-2 text-center">{{ blog.title }}</h5>
+
+                    {% if blog.image_url %}
+                    <img src="{{ blog.image_url }}" class="img-fluid mb-2 rounded mx-auto d-block" style="max-height: 200px; object-fit: cover;" alt="Blog Image">
+                    {% endif %}
+
+                    <p class="card-text mb-2">{{ blog.content[:200] }}{% if blog.content|length > 200 %}...{% endif %}</p>
+                    <p class="text-muted mb-0" style="font-size: 0.8rem;">By <strong>@{{ blog.user_name }}</strong> on {{ blog.created_at }}</p>
+
+                    <div class="d-flex justify-content-between mt-3 align-items-center">
+                        <a href="{{ url_for('view_blog', blog_id=blog.id) }}" class="btn btn-outline-primary btn-sm px-2 py-1" style="font-size: 0.75rem;">Read More</a>
+                        <div id="like-container">
+                            <button data-blog-id="{{ blog.id }}"
+                                class="btn btn-sm like-btn {{ 'btn-secondary' if blog.has_liked else 'btn-outline-secondary' }}">
+                                <span class="like-icon">{{ '❤️' if blog.has_liked else '♡' }}</span>
+                                <span class="like-count" style="color:white">{{ blog.like_count or 0 }}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-muted text-center">No blogs found in this category.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/like.js') }}"></script>
+{% endblock %}

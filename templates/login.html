@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+
+<div id="login-alert-container" class="container btn-sm"></div>
+<div class="container" style="margin-top: 50px;">
+   
+    <h2>Welcome to the Login Page</h2>
+    <p>Please enter your credentials to log in.</p>
+    <h3>Login</h3>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        {% if message == "Logged in Successfully!" or message == "Password reset successful. Please log in."%}
+        <div style="color:green;">{{ message }}</div>
+        {% else %}
+        <div style="color:red;">{{ message }}</div>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+    <form action="/login" method="POST" autocomplete="off">
+
+        <label>Email or Username:</label><br>
+        <input type="text" name="identifier" required autocomplete="off"><br><br>
+
+        <label>Password:</label><br>
+        <input type="password" name="password" required autocomplete="off"><br><br>
+
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            {% if message == "Incorrect password!"%}
+            <p><a href="{{ url_for('forgot_password') }}">Forgot Password</a></p>
+            {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <button type="submit">login</button>
+
+
+    </form>
+ 
+</div>
+{% endwith %}
+{% endblock %}

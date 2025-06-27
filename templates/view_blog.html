@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="card shadow-lg border-dark p-5">
+
+        <h2 class="fw-bold">{{ blog.title }}</h2>
+
+        {% if blog.image_url %}
+        <img src="{{ blog.image_url }}" class="img-fluid mb-3 rounded" style="max-height: 300px; object-fit: cover;"
+            alt="Blog Image">
+        {% endif %}
+
+        <p class="text-muted" style="font-size: 0.9rem;">
+            Posted by <a href="/user/{{ blog.user_name }}"><strong>@{{ blog.user_name }}</strong></a> on {{
+            blog.created_at }}
+        </p>
+        <hr>
+
+        <div id="like-container">
+            <button data-blog-id="{{ blog.id }}"
+                class="btn btn-sm like-btn {{ 'btn-secondary' if blog.has_liked else 'btn-outline-secondary' }}">
+                <span class="like-icon">{{ '❤️' if blog.has_liked else '♡' }}</span>
+                <span class="like-count" style="color:white">{{ blog.like_count or 0 }}</span>
+            </button>
+        </div>
+
+        <div class="card-text">{{ blog.content | safe }}</div>
+
+        <div class="container">
+            <a href="/" class="btn btn-outline-primary btn-sm mt-3">Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/like.js') }}"></script>
+{% endblock %}

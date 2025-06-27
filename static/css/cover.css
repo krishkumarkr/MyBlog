@@ -1,0 +1,56 @@
+/* cover.css */
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-weight: 700;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 2px solid white;
+}
+
+body {
+    background-color: #1e1e1e;
+    /* or whatever background you want */
+    color: white;
+    height: 100%;
+    margin: 0;
+}
+
+.cover-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.footer-line {
+    height: 2px;
+    width: 100%;
+    background-color: #ffffff33;
+    /* subtle white with transparency */
+    margin-top: 100px;
+}
+
+.form-label {
+    color: rgb(232, 232, 52);
+    font-size: 1.2rem;
+    margin-top: 20px;
+    
+}
+
+.navbar-nav .nav-link {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}

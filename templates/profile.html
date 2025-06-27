@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="card shadow-lg border-dark p-4">
+        <h3 class="mb-3">👤 Profile Details</h3>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item bg-dark text-white">Name: {{ user.name }}</li>
+            <li class="list-group-item bg-dark text-white">Username: {{ user.user_name }}</li>
+            <li class="list-group-item bg-dark text-white">Email: {{ user.email }}</li>
+            <li class="list-group-item bg-dark text-white">
+                Blogs Uploaded:
+                <a href="{{ url_for('my_blogs') }}" class="text-decoration-underline text-info">
+                    {{ blog_count }}
+                </a>
+            </li>
+
+            <li class="list-group-item bg-dark text-white">
+                Blogs Liked:
+                <a href="{{ url_for('liked_blogs') }}" class="text-decoration-underline text-info">
+                    {{ liked_count }}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

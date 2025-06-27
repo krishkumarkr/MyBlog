@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<div class="container" style="margin-top: 50px;">
+    <h1>Welcome to the Register Page</h1>
+    <p>Please fill in the form below to create an account.</p>
+    <h2>Register</h2>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        {% if message == "Signup successful! You can now log in." %}
+        <div style="color:green;">{{ message }}</div>
+        {% else %}
+        <div style="color:red;">{{ message }}</div>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <form action="/signup" method="POST" autocomplete="off">
+        <!-- Hidden dummy fields -->
+        <input type="text" name="fake_username" style="display:none">
+        <input type="password" name="fake_password" style="display:none">
+
+        <label>Name:</label><br>
+        <input type="text" name="reg_name" required autocomplete="off"><br><br>
+
+        <label>User Name:</label><br>
+        <input type="text" name="reg_username" required autocomplete="off"><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="reg_email" required autocomplete="off"><br><br>
+
+        <label>Create Password:</label><br>
+        <input type="password" name="reg_password" required autocomplete="new-password"><br><br>
+
+        <label>Confirm Password:</label><br>
+        <input type="password" name="reg_confirm_password" required autocomplete="new-password"><br><br>
+
+        <button type="submit">Sign Up</button>
+    </form>
+</div>
+
+{% endblock %}
