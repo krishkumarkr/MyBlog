@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# SQLite DBs
+*.db
+instance/
+
+# Flask session files
+flask_session/
+
+# Virtual environment
+venv/
+
+# IDE/editor config
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
