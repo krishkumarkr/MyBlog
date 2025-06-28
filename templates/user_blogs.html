@@ -7,21 +7,26 @@
   <h3 class="mb-4">@{{ user_name }}'s Blogs</h3>
 
   {% if blogs %}
-    {% for blog in blogs %}
-    <div class="card mb-3 shadow-sm" style="border: 1px solid #aaa;">
-      <div class="card-body">
-        <h5 class="card-title"><strong>{{ blog.title }}</strong></h5>
-        {% if blog.category %}
-          <span class="badge bg-secondary float-end">{{ blog.category }}</span>
-        {% endif %}
-        <p class="card-text">{{ blog.content[:120] }}...</p>
-        <p class="text-muted" style="font-size: 0.85rem;">Posted on {{ blog.created_at }}</p>
-        <a href="{{ url_for('view_blog', blog_id=blog.id) }}" class="btn btn-sm btn-outline-primary">Read more</a>
-      </div>
+  {% for blog in blogs %}
+  <div class="card mb-3 shadow-sm" style="border: 1px solid #aaa;">
+    <div class="card-body">
+      {% if blog.category %}
+      <span class="badge bg-secondary position-absolute top-0 end-0 m-2" style="font-size: 0.75rem;">{{
+        blog.category}}</span>
+      {% endif %}
+      <h4 class="card-title mb-3"><strong>{{ blog.title }}</strong></h4>
+      {% if blog.image_url %}
+      <img src="{{ blog.image_url }}" class="img-fluid mb-2 rounded" style="max-height: 200px; object-fit: cover;"
+        alt="Blog Image">
+      {% endif %}
+      <p class="card-text">{{ blog.content[:200] |safe }}{% if blog.content|length > 200 %}...{% endif %}</p>
+      <p class="text-muted" style="font-size: 0.85rem;">Posted on {{ blog.created_at }}</p>
+      <a href="{{ url_for('view_blog', blog_id=blog.id) }}" class="btn btn-sm btn-outline-primary">Read more</a>
     </div>
-    {% endfor %}
+  </div>
+  {% endfor %}
   {% else %}
-    <p class="text-muted">This user hasn&rsquo;t posted any blogs yet.</p>
+  <p class="text-muted">This user hasn&rsquo;t posted any blogs yet.</p>
   {% endif %}
 </div>
 {% endblock %}

@@ -2,6 +2,46 @@
 
 {% block title %}{{ blog.title }}{% endblock %}
 
+{% block head %}
+<style>
+    .blog-content {
+        line-height: 1.7;
+        font-size: 1rem;
+        text-align: justify;
+        white-space: pre-wrap;
+        color: #eaeaea;
+    }
+
+    .blog-content p,
+    .blog-content ul,
+    .blog-content ol {
+        margin-bottom: 1em;
+    }
+
+    .blog-content ul,
+    .blog-content ol {
+        padding-left: 2rem;
+        margin-left: 0;
+        list-style-position: inside;
+    }
+
+    .blog-content li {
+        text-align: justify;
+        margin-bottom: 0.5em;
+    }
+
+    .blog-content strong {
+        font-weight: 600;
+        color: #f8f9fa;
+    }
+
+    .blog-content em {
+        font-style: italic;
+        color: #ddd;
+    }
+</style>
+{% endblock %}
+
 {% block body %}
 <div class="container mt-5">
     <div class="card shadow-lg border-dark p-5">
@@ -27,8 +67,7 @@
             </button>
         </div>
 
-        <div class="card-text">{{ blog.content | safe }}</div>
-
+        <div class="card-text blog-content">{{ blog.content | safe }}</div>
         <div class="container">
             <a href="/" class="btn btn-outline-primary btn-sm mt-3">Back to Home</a>
         </div>

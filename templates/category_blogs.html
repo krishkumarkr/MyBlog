@@ -19,7 +19,7 @@
                     <img src="{{ blog.image_url }}" class="img-fluid mb-2 rounded mx-auto d-block" style="max-height: 200px; object-fit: cover;" alt="Blog Image">
                     {% endif %}
 
-                    <p class="card-text mb-2">{{ blog.content[:200] }}{% if blog.content|length > 200 %}...{% endif %}</p>
+                    <p class="card-text mb-2">{{ blog.content[:300]|safe }}{% if blog.content|length > 300 %}...{% endif %}</p>
                     <p class="text-muted mb-0" style="font-size: 0.8rem;">By <strong>@{{ blog.user_name }}</strong> on {{ blog.created_at }}</p>
 
                     <div class="d-flex justify-content-between mt-3 align-items-center">

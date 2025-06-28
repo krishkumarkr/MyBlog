@@ -309,25 +309,36 @@ def my_blogs():
 @app.route("/edit_blog/<int:blog_id>", methods=["GET", "POST"])
 def edit_blog(blog_id):
     user_id = session.get("user_id")
+    if not user_id:
+        flash("Please log in to edit blogs.")
+        return redirect("/login")
 
     blog = db.execute("SELECT * FROM blogs WHERE id = ? AND user_id = ?", blog_id, user_id)
     if not blog:
-        flash("Blog not found or unauthorized.")
+        flash("Blog not found or access denied.")
         return redirect("/my_blogs")
 
+    blog = blog[0]
+
     if request.method == "POST":
-        title = request.form["title"]
-        content = request.form["content"]
-        category = request.form["category"]
+        title = request.form.get("title", "").strip()
+        content = request.form.get("content", "").strip()
+        category = request.form.get("category", "").strip()
+
+        if not title or not content or not category:
+            flash("All fields are required.")
+            return redirect(request.url)
 
         db.execute(
             "UPDATE blogs SET title = ?, content = ?, category = ? WHERE id = ? AND user_id = ?",
             title, content, category, blog_id, user_id
         )
-        flash("Blog updated successfully.")
+
+        flash("Blog updated successfully!")
         return redirect("/my_blogs")
 
-    return render_template("edit_blog.html", blog=blog[0])
+    return render_template("edit_blog.html", blog=blog)
+
 
 @app.route("/delete_blog/<int:blog_id>", methods=["POST"])
 def delete_blog(blog_id):
@@ -356,6 +367,10 @@ def create_blog():
 
         if not title or not content:
             flash("Title and content are required!")
+            return redirect("/create_blog")
+        
+        if not category:
+            flash("Category is required!")
             return redirect("/create_blog")
     
         image_url = None
