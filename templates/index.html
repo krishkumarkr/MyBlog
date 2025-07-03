@@ -34,21 +34,18 @@
     <h3 class="mb-4 text-center text-decoration-underline">Recent Blogs</h3>
 
     {% if recent_blogs %}
-    <div class="container">
-        <div class="row justify-content-start"> <!-- OR center if you want centering -->
+    <div class="container mt-4">
+        <div class="row g-4">
             {% for blog in recent_blogs %}
-            <div class="col-12 col-sm-6 col-md-4 mb-4">
-                <div class="card h-100 shadow-lg border-dark" style="border-width: 2px; transition: transform 0.3s;">
+            <div class="col-md-4 d-flex">
+                <div class="card shadow-lg border-dark w-100" style="border-width: 2px; transition: transform 0.3s;">
                     {% if blog.image_url %}
                     <img src="{{ blog.image_url }}" class="card-img-top" style="max-height: 180px; object-fit: cover;"
                         alt="Blog Image">
                     {% endif %}
-                    <div class="card-body position-relative">
+                    <div class="card-body">
                         <h5 class="card-title fw-bold">{{ blog.title }}</h5>
-                        <p class="card-text">{{ blog.content[:100]|safe }}{% if blog.content|length > 100 %}...{% endif
-                            %}</p>
-
-                        <p class="text-muted mb-2" style="font-size: 0.8rem;">Posted on {{ blog.created_at }}</p>
+                        <p class="card-text">{{ blog.content | striptags | truncate(100) }}</p><p class="text-muted mb-2" style="font-size: 0.8rem;">Posted on {{ blog.created_at }}</p>
                         <a href="{{ url_for('view_blog', blog_id=blog.id) }}"
                             class="btn btn-sm btn-outline-primary">Read more</a>
                     </div>
@@ -60,6 +57,7 @@
     {% else %}
     <p class="text-muted text-center">No blogs have been posted yet.</p>
     {% endif %}
+
 
 
     {% endblock %}
