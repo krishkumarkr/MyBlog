@@ -1,11 +1,9 @@
-<<<<<<< HEAD
 {% extends "layout.html" %}
 
 {% block title %}Home{% endblock %}
 
 {% block body %}
 
-<!-- Flash Messages -->
 <div id="flash-message-container">
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -41,14 +39,13 @@
             <div class="col-md-4 d-flex">
                 <div class="card shadow-lg border-dark w-100" style="border-width: 2px; transition: transform 0.3s;">
                     {% if blog.image_url %}
-                    <img src="{{ blog.image_url }}" class="card-img-top" style="max-height: 180px; object-fit: cover;"
-                        alt="Blog Image">
+                    <img src="{{ blog.image_url }}" class="card-img-top" style="max-height: 180px; object-fit: cover;" alt="Blog Image">
                     {% endif %}
                     <div class="card-body">
                         <h5 class="card-title fw-bold">{{ blog.title }}</h5>
-                        <p class="card-text">{{ blog.content | striptags | truncate(100) }}</p><p class="text-muted mb-2" style="font-size: 0.8rem;">Posted on {{ blog.created_at }}</p>
-                        <a href="{{ url_for('view_blog', blog_id=blog.id) }}"
-                            class="btn btn-sm btn-outline-primary">Read more</a>
+                        <p class="card-text">{{ blog.content | striptags | truncate(100) }}</p>
+                        <p class="text-muted mb-2" style="font-size: 0.8rem;">Posted on {{ blog.created_at }}</p>
+                        <a href="{{ url_for('view_blog', blog_id=blog.id) }}" class="btn btn-sm btn-outline-primary">Read more</a>
                     </div>
                 </div>
             </div>
@@ -59,92 +56,17 @@
     <p class="text-muted text-center">No blogs have been posted yet.</p>
     {% endif %}
 
-
-
-    {% endblock %}
-
-    {% block scripts %}
-    <script>
-        setTimeout(() => {
-            const flash = document.getElementById("flash-message-container");
-            if (flash) {
-                flash.style.display = "none";
-            }
-        }, 3000);
-    </script>
-=======
-{% extends "layout.html" %}
-
-{% block title %}Home{% endblock %}
-
-{% block body %}
-
-<!-- Flash Messages -->
-<div id="flash-message-container">
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li style="color:green;">{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
 </div>
 
-<div class="container mt-4">
+{% endblock %}
 
-    <div class="p-5 text-center rounded-3 shadow-sm mb-5" style="background-color: #a0a0a0;">
-        <h1 class="display-5 fw-bold">Welcome to <span class="text-primary">MyBlog</span></h1>
-        <p class="lead">A place to express yourself, share ideas, and explore content from others.</p>
-        {% if not session.get("user_id") %}
-        <a href="{{ url_for('signup') }}" class="btn btn-primary btn-lg me-2">Sign Up</a>
-        <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg">Log In</a>
-        {% else %}
-        <a href="{{ url_for('create_blog') }}" class="btn btn-success btn-lg me-2">Write a Blog</a>
-        <a href="{{ url_for('my_blogs') }}" class="btn btn-outline-success btn-lg">My Blogs</a>
-        {% endif %}
-    </div>
-
-    <h3 class="mb-4 text-center text-decoration-underline">Recent Blogs</h3>
-
-    {% if recent_blogs %}
-    <div class="container mt-4">
-        <div class="row g-4">
-            {% for blog in recent_blogs %}
-            <div class="col-md-4 d-flex">
-                <div class="card shadow-lg border-dark w-100" style="border-width: 2px; transition: transform 0.3s;">
-                    {% if blog.image_url %}
-                    <img src="{{ blog.image_url }}" class="card-img-top" style="max-height: 180px; object-fit: cover;"
-                        alt="Blog Image">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">{{ blog.title }}</h5>
-                        <p class="card-text">{{ blog.content | striptags | truncate(100) }}</p><p class="text-muted mb-2" style="font-size: 0.8rem;">Posted on {{ blog.created_at }}</p>
-                        <a href="{{ url_for('view_blog', blog_id=blog.id) }}"
-                            class="btn btn-sm btn-outline-primary">Read more</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    {% else %}
-    <p class="text-muted text-center">No blogs have been posted yet.</p>
-    {% endif %}
-
-
-
-    {% endblock %}
-
-    {% block scripts %}
-    <script>
-        setTimeout(() => {
-            const flash = document.getElementById("flash-message-container");
-            if (flash) {
-                flash.style.display = "none";
-            }
-        }, 3000);
-    </script>
->>>>>>> 51b1daa (Updated project from PythonAnywhere)
-    {% endblock %}
+{% block scripts %}
+<script>
+    setTimeout(() => {
+        const flash = document.getElementById("flash-message-container");
+        if (flash) {
+            flash.style.display = "none";
+        }
+    }, 3000);
+</script>
+{% endblock %}
