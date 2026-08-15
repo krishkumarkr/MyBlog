@@ -3,30 +3,17 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-
-<div id="flash-message-container">
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li style="color:green;">{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-</div>
-
 <div class="container mt-4">
 
     <div class="p-5 text-center rounded-3 shadow-sm mb-5" style="background-color: #a0a0a0;">
-        <h1 class="display-5 fw-bold">Welcome to <span class="text-primary">MyBlog</span></h1>
-        <p class="lead">A place to express yourself, share ideas, and explore content from others.</p>
+        <h1 class="display-5 fw-bold text-dark">Welcome to <span class="text-primary">MyBlog</span></h1>
+        <p class="lead text-dark">A place to express yourself, share ideas, and explore content from others.</p>
         {% if not session.get("user_id") %}
         <a href="{{ url_for('signup') }}" class="btn btn-primary btn-lg me-2">Sign Up</a>
-        <a href="{{ url_for('login') }}" class="btn btn-outline-primary mb-2 mt-2 btn-lg">Log In</a>
+        <a href="{{ url_for('login') }}" class="btn btn-outline-dark mb-2 mt-2 btn-lg">Log In</a>
         {% else %}
         <a href="{{ url_for('create_blog') }}" class="btn btn-success btn-lg me-2">Write a Blog</a>
-        <a href="{{ url_for('my_blogs') }}" class="btn btn-outline-success btn-lg">My Blogs</a>
+        <a href="{{ url_for('my_blogs') }}" class="btn btn-outline-dark btn-lg">My Blogs</a>
         {% endif %}
     </div>
 
@@ -57,16 +44,4 @@
     {% endif %}
 
 </div>
-
-{% endblock %}
-
-{% block scripts %}
-<script>
-    setTimeout(() => {
-        const flash = document.getElementById("flash-message-container");
-        if (flash) {
-            flash.style.display = "none";
-        }
-    }, 3000);
-</script>
 {% endblock %}

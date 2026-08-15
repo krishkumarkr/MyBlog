@@ -7,22 +7,19 @@
 
 <style>
     #editor {
-        height: 300px; /* Set the height for the container */
+        height: 300px;
     }
   .ql-editor {
     color: #fff !important;
     border-radius: 4px;
   }
-
   .ql-toolbar {
     background-color: #222;
     border: 1px solid #444;
   }
-
   .ql-container {
     border: 1px solid #444;
   }
-
   .ql-editor::before {
     color: #fff !important;
     opacity: 0.6;
@@ -77,10 +74,6 @@
             ]
         }
     });
-
-    // Set initial content if it isn't loading correctly in the div
-    // (only necessary if {{ blog.content | safe }} fails to render HTML correctly)
-    // quill.root.innerHTML = {{ blog.content | tojson | safe }};
 
     // Sync content on submit
     document.getElementById('editForm').addEventListener('submit', function () {

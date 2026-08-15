@@ -8,8 +8,8 @@
 
     {% if blogs %}
     {% for blog in blogs %}
-    <div class="card mb-3 shadow-sm border-secondary">
-        <div class="card-body">
+    <div class="card mb-3 shadow-sm border-secondary text-start">
+        <div class="card-body position-relative">
 
             {% if blog.category %}
             <span class="badge bg-secondary position-absolute top-0 end-0 m-2" style="font-size: 0.75rem;">
@@ -17,15 +17,23 @@
             </span>
             {% endif %}
 
-            <h4 class="card-title"><strong>{{ blog.title }}</strong></h4>
+            <h4 class="card-title text-center mb-3"><strong>{{ blog.title }}</strong></h4>
+            
             {% if blog.image_url %}
-            <img src="{{ blog.image_url }}" class="img-fluid mb-2 rounded" style="max-height: 200px; object-fit: cover;"
+            <img src="{{ blog.image_url }}" class="img-fluid mb-3 rounded mx-auto d-block" style="max-height: 200px; object-fit: cover;"
                 alt="Blog Image">
             {% endif %}
-            <p class="card-text">{{ blog.content[:200]|safe }}{% if blog.content|length > 200 %}...{% endif %}</p>
-            <p class="text-muted" style="font-size: 0.85rem;">By <a href="/user/{{ blog.user_name }}">@{{ blog.user_name
-                    }}</a></p>
-            <a href="{{ url_for('view_blog', blog_id=blog.id) }}" class="btn btn-sm btn-outline-light">Read More</a>
+            
+            <!-- FIX: Strip HTML tags before truncating to prevent layout breaks -->
+            <p class="card-text text-center">{{ blog.content | striptags | truncate(200) }}</p>
+            
+            <p class="text-muted text-center" style="font-size: 0.85rem;">
+                By <a href="/user/{{ blog.user_name }}">@{{ blog.user_name }}</a>
+            </p>
+            
+            <div class="text-center">
+                <a href="{{ url_for('view_blog', blog_id=blog.id) }}" class="btn btn-sm btn-outline-light">Read More</a>
+            </div>
         </div>
     </div>
     {% endfor %}
