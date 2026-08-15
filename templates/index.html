@@ -23,7 +23,7 @@
         <p class="lead">A place to express yourself, share ideas, and explore content from others.</p>
         {% if not session.get("user_id") %}
         <a href="{{ url_for('signup') }}" class="btn btn-primary btn-lg me-2">Sign Up</a>
-        <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg">Log In</a>
+        <a href="{{ url_for('login') }}" class="btn btn-outline-primary mb-2 mt-2 btn-lg">Log In</a>
         {% else %}
         <a href="{{ url_for('create_blog') }}" class="btn btn-success btn-lg me-2">Write a Blog</a>
         <a href="{{ url_for('my_blogs') }}" class="btn btn-outline-success btn-lg">My Blogs</a>

@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 from cs50 import SQL
 from flask import Flask, redirect, render_template, request, url_for, session, flash
 from flask_session import Session
@@ -6,16 +8,17 @@ from flask import jsonify
 from flask_mail import Mail, Message
 import random, time
 
-import os
 from werkzeug.utils import secure_filename
 
 import sqlite3
+
+load_dotenv()
 
 db_path = os.path.join(os.path.dirname(__file__), "instance", "app.db")
 sqlite3.connect(db_path).close()
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
+app.secret_key = os.getenv("FLASK_SECRET_KEY", "fallback_dev_key")
 
 db = SQL(f"sqlite:///{db_path}")
 
