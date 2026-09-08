@@ -1,5 +1,11 @@
 # MyBlog
 
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-3.1.0-000000?logo=flask&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-3-003B57?logo=sqlite&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?logo=bootstrap&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 A full-stack blogging platform built with Flask, SQLite, and Bootstrap — sign up, write posts with images, organize by category, like posts, and reset forgotten passwords via secure emailed tokens.
 
 **Live demo:** https://krishkr093.pythonanywhere.com/
@@ -180,3 +186,9 @@ python app.py
 ## Conclusion
 
 MyBlog is not just a blogging platform, but a hands-on exercise in full-stack development. Through building this, I have tackled challenges in database design, authentication, templating, and frontend design. I'm proud of what this project demonstrates, and I'm excited about how it could evolve into something even more powerful.
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
